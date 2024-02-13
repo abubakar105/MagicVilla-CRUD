@@ -9,18 +9,24 @@ import { Router } from '@angular/router';
 })
 export class LoginService {
   isLogeedIn: boolean = false;
-  private url = 'http://restapi.adequateshop.com/api/authaccount/login';
+  private url = 'https://localhost:7065/api/UserAuth/login';
 
   constructor(private http: HttpClient,private router:Router) {}
 
   login(user: LoginModel) {
+    const loginUser={
+      userName:user.email,
+      password:user.password
+    };
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
     });
 
-        return this.http.post<any>(this.url, user, { headers: headers }).pipe(
+        return this.http.post<any>(this.url,loginUser).pipe(
         map((res) => {
-            const token = res?.data?.Token;
+          console.log(res);
+          console.log("res");
+            const token = res?.result?.token;
             if (token) {
             this.isLogeedIn=true
             localStorage.setItem("isLogeedIn",JSON.stringify(this.isLogeedIn))

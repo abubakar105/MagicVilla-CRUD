@@ -7,6 +7,7 @@ import { AuthGuard, LoginAuthGuard } from '../guards/auth.guard';
 import { ProductItemComponent } from '../components/product-list/product-item/product-item.component';
 import { productsResolver } from '../Resolvers/products-resolve.resolver';
 import { RegisterComponent } from '../login/register/register.component';
+import { SingleVillaComponent } from '../components/product-list/single-villa/single-villa.component';
 
 const route: Routes = [
   {
@@ -21,6 +22,11 @@ const route: Routes = [
     path: 'home/:id',
     component: ProductItemComponent,
     canActivate: [AuthGuard],
+  },
+  {
+    path:'home/villas/:id',
+    component:SingleVillaComponent,
+    canActivate:[AuthGuard]
   },
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'page-not-found', component: NotfoundComponent },

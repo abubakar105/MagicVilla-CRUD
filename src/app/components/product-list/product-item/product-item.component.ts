@@ -7,26 +7,26 @@ import { ProductService } from '../../../services/product.service';
   templateUrl: './product-item.component.html',
   styleUrl: './product-item.component.css'
 })
-export class ProductItemComponent  implements OnInit{
+export class ProductItemComponent {
   singleProduct;
   loading=true
   constructor(private route: ActivatedRoute,private productService:ProductService) {}
-  ngOnInit() {
-    this.route.params.subscribe((params: Params) => {
-       const prodId = params['id'];
-       this.productService.fetchSingleProduct(prodId).subscribe({      
-        next: (resData) => {
-           console.log("Products:", resData);
-           this.singleProduct=resData;
-           setTimeout(()=>{
-             this.loading=false
-            },500)
-         },
-        error: (error) => {
-           console.error("Error fetching products:", error);
-         }
-       }
-       );
-    })
-  }
+  // ngOnInit() {
+  //   this.route.params.subscribe((params: Params) => {
+  //      const prodId = params['id'];
+  //      this.productService.fetchSingleProduct(prodId).subscribe({      
+  //       next: (resData) => {
+  //          console.log("Products:", resData);
+  //          this.singleProduct=resData;
+  //          setTimeout(()=>{
+  //            this.loading=false
+  //           },500)
+  //        },
+  //       error: (error) => {
+  //          console.error("Error fetching products:", error);
+  //        }
+  //      }
+  //      );
+  //   })
+  // }
 }

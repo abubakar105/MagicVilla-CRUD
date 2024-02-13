@@ -13,20 +13,12 @@ export class ProductService{
     fetchProducts():Observable<any>{
            return this.http
                .get(
-                 'https://fakestoreapi.com/products'
-               )
-            //    .pipe(
-            //      map((resData) => {
-            //         console.log("resData")
-            //         console.log(resData)
-            //         // return "sda"
-            //     //    this.productList=resData
-            //      })
-            //    )
+                 'https://localhost:7065/api/VillaApi'
+               );
     }
-    fetchSingleProduct(id:Params){
+    fetchSingleVilla(id:Params){
       return this.http.get(
-        `https://fakestoreapi.com/products/${id}`
+        `https://localhost:7065/api/VillaApi/${id}`
       )
     }
 }

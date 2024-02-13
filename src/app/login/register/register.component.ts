@@ -13,6 +13,7 @@ import {
 })
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
+ 
 
   ngOnInit(): void {
     this.registerForm = new FormGroup({
@@ -22,9 +23,9 @@ export class RegisterComponent implements OnInit {
         Validators.required,
         Validators.pattern(/(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*#?&^_-]).{8,}/),
       ]),
-      repeatPassword: new FormControl('', [
+      role: new FormControl('', [
         Validators.required,
-        this.passwordMatchValidator.bind(this)  // Custom validator
+        this.roleValidator.bind(this) // Custom validator
       ]),
     });
     // this.registerForm = new FormGroup({
@@ -44,18 +45,11 @@ export class RegisterComponent implements OnInit {
     //   ]),
     // });
   }
-  passwordMatchValidator(control: AbstractControl): { [key: string]: boolean } | null {
-    const password = control.get('password');
-    const repeatPassword = control.get('repeatPassword');
-    console.log(":password")
-    console.log(password)
-    console.log(":repeatPassword")
-    console.log(repeatPassword)
-    if (!password || !repeatPassword) {
-      return null;
+  roleValidator(role:string){
+    if(role.toLocaleLowerCase()!=="admin" || role.toLocaleLowerCase()!=="user"){
+      return false;
     }
-  
-    return password.value === repeatPassword.value ? null : { 'passwordMismatch': true };
+    return true;
   }
   onSubmit(){
     console.log(this.registerForm)

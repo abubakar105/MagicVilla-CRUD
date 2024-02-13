@@ -18,6 +18,8 @@ import { NavbarLogoComponent } from './components/navbar/navbar-logo/navbar-logo
 import { NavbarLinksComponent } from './components/navbar/navbar-links/navbar-links.component';
 import { NavbarFiltersComponent } from './components/navbar/navbar-filters/navbar-filters.component';
 import { RegisterComponent } from './login/register/register.component';
+import { VillaListComponent } from './components/product-list/villa-list/villa-list.component';
+import { SingleVillaComponent } from './components/product-list/single-villa/single-villa.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { RegisterComponent } from './login/register/register.component';
     NavbarLogoComponent,
     NavbarLinksComponent,
     NavbarFiltersComponent,
-    RegisterComponent
+    RegisterComponent,
+    VillaListComponent,
+    SingleVillaComponent
   ],
   imports: [
     BrowserModule,

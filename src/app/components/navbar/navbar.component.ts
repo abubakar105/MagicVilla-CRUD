@@ -10,11 +10,17 @@ import { Observable } from 'rxjs';
 })
 export class NavbarComponent implements OnInit, DoCheck {
   isLoggedIn: string;
-  constructor(private authService: LoginService) {}
+  constructor(private authService: LoginService,private router:Router) {}
   ngOnInit(): void {
     this.isLoggedIn = localStorage.getItem('UserToken');
   }
   ngDoCheck(): void {
     this.isLoggedIn = localStorage.getItem('UserToken');
+  }
+  logout(){
+    localStorage.removeItem("isLogeedIn");
+    localStorage.removeItem("UserToken");
+    window.location.reload()
+    this.router.navigate(['/login']);
   }
 }
