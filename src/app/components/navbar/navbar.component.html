@@ -1,0 +1,15 @@
+<!-- <div class="main-navbar shadow-sm sticky-top"> -->
+<div  *ngIf="isLoggedIn" class="top-navbar">
+  <div class="container-fluid" style="background: #508bfc">
+    <div class="row d-flex justify-content-between align-items-center">
+      <div class="col-md-7">
+        <app-navbar-logo></app-navbar-logo>
+      </div>
+      <div class="col-md-5">
+        <app-navbar-links></app-navbar-links>
+      </div>
+    </div>
+  </div>
+  <!-- </div> -->
+  <app-navbar-filters></app-navbar-filters>
+</div>

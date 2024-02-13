@@ -1,0 +1,49 @@
+<div *ngIf="loading">
+  <div class="loading">Loading&#8230;</div>
+
+  <div class="content"></div>
+</div>
+<div class="container d-flex justify-content-center mt-50 mb-50">
+  <div class="row">
+    <div *ngFor="let product of products" class="col-md-4 mt-2 height">
+      <div class="card btn" [routerLink]="product.id">
+        <div class="card-body">
+          <div class="card-img-actions">
+            <img
+              [src]="product.image"
+              class="card-img img-fluid"
+              width="96"
+              height="350"
+              alt=""
+            />
+          </div>
+        </div>
+        <div class="card-body bg-light text-center">
+          <div class="mb-2">
+            <h6 class="font-weight-semibold mb-2">
+              <a href="#" class="text-default mb-2" data-abc="true">
+                {{ product.title }}
+              </a>
+            </h6>
+
+            <a href="#" class="text-muted" data-abc="true">{{
+              product.category
+            }}</a>
+          </div>
+
+          <h3 class="mb-0 font-weight-semibold">${{ product.price }}</h3>
+
+          <div class="d-flex align-items-center justify-content-center">
+            <div *ngFor="let star of [1, 2, 3, 4, 5]">
+              <i *ngIf="product.rating.rate > star" class="fa fa-star star"></i>
+            </div>
+          </div>
+          <div class="text-muted mb-3">{{ product.rating.count }} reviews</div>
+          <button type="button" class="btn bg-cart">
+            <i class="fa fa-cart-plus mr-2"></i> Add to cart
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
