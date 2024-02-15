@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Params, Router } from '@angular/router';
 import { Observable, map } from 'rxjs';
@@ -7,7 +7,10 @@ import { Observable, map } from 'rxjs';
   providedIn: 'root',
 })
 export class ProductService {
-  constructor(private http: HttpClient, private router: Router) {}
+   token:string;
+  constructor(private http: HttpClient, private router: Router) {
+    this.token = localStorage.getItem("UserToken"); 
+  }
   productList = [];
 
   fetchProducts(): Observable<any> {
@@ -21,6 +24,8 @@ export class ProductService {
   }
 
   deleteVilla(id: Params) {
+    // const Headers = new HttpHeaders();
+    // Headers.append('Authorization', 'Bearer '+this.token)
     return this.http.delete(`https://localhost:7065/api/VillaApi/${id}`);
   }
 

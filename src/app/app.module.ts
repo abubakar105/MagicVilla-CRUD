@@ -8,7 +8,7 @@ import { LoginComponent } from './login/login/login.component';
 import { NotfoundComponent } from './components/notfound/notfound.component';
 import { AppRouting } from './routing/routing.module';
 import {  FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './components/home/home.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ProductListComponent } from './components/product-list/product-list.component';
@@ -17,6 +17,7 @@ import { VillaListComponent } from './components/product-list/villa-list/villa-l
 import { SingleVillaComponent } from './components/product-list/single-villa/single-villa.component';
 import { AddVillaComponent } from './components/add-villa/add-villa.component';
 import { AngularToastifyModule, ToastService } from 'angular-toastify';
+import { AuthInterceptor, AuthInterceptorProvider } from './interceptors/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { AngularToastifyModule, ToastService } from 'angular-toastify';
   ],
   providers: [
     provideClientHydration(),
-    ToastService
+    ToastService,
+    AuthInterceptorProvider
   ],
   bootstrap: [AppComponent]
 })

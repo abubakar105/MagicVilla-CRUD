@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from '../../services/product.service';
 import { Location } from '@angular/common';
 import { NgForm } from '@angular/forms';
-import Toastify from "toastify";
+import Toastify from 'toastify';
 import { ToastService } from 'angular-toastify';
 
 @Component({
@@ -26,8 +26,8 @@ export class AddVillaComponent {
   valid = false;
   loading = true;
   id;
-  message='';
-  isError=false;
+  message = '';
+  isError = false;
 
   constructor(
     private _toastService: ToastService,
@@ -42,7 +42,6 @@ export class AddVillaComponent {
   createVilla() {
     this._toastService.info('This is the body of the notification');
 
-    console.log(this.singleVilla);
     if (
       this.singleVilla.amenity !== '' &&
       this.singleVilla.name !== '' &&
@@ -52,28 +51,25 @@ export class AddVillaComponent {
       this.singleVilla.occupancy > 0 &&
       this.singleVilla.sqft > 0
     ) {
-      this.message="";
-      this.valid=true;
+      this.message = '';
+      this.valid = true;
       this.productService.createVilla(this.singleVilla).subscribe({
-        next:(res)=>{
-          console.log("ress for create",res)
-    this._location.back();
-
+        next: (res) => {
+          this._location.back();
         },
-        error:(error)=>{
-          this.isError=true;
+        error: (error) => {
+          this.isError = true;
           console.log(error.error.ErrorMessage[0]);
-          setTimeout(()=>{
-            this.closeMsg()
-          },5000)
-        }
-      })
-    }
-    else{
-      this.message="All the fields are required ";
+          setTimeout(() => {
+            this.closeMsg();
+          }, 5000);
+        },
+      });
+    } else {
+      this.message = 'All the fields are required ';
     }
   }
-  closeMsg(){
-    this.isError=false;
+  closeMsg() {
+    this.isError = false;
   }
 }

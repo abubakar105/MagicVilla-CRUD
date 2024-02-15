@@ -15,7 +15,6 @@ export class ProductListComponent implements OnInit {
     this.router.navigate(['/home/villas', id]);
   }
   deleteVilla(id){
-    console.log("Delete")
     this.productService.deleteVilla(id).subscribe({
       next: (resData) => {
         console.log('Products:', resData);
@@ -34,7 +33,6 @@ export class ProductListComponent implements OnInit {
     this.loading = true;
     this.productService.fetchProducts().subscribe({
       next: (resData) => {
-        console.log('Products:', resData.result);
         this.Villas = resData.result;
         this.loading = false;
       },
