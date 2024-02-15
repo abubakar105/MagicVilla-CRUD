@@ -7,19 +7,16 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login/login.component';
 import { NotfoundComponent } from './components/notfound/notfound.component';
 import { AppRouting } from './routing/routing.module';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {  FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './components/home/home.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ProductListComponent } from './components/product-list/product-list.component';
-import { ProductItemComponent } from './components/product-list/product-item/product-item.component';
-import { ProductItemLoaderComponent } from './components/product-list/product-item-loader/product-item-loader.component';
-import { NavbarLogoComponent } from './components/navbar/navbar-logo/navbar-logo.component';
-import { NavbarLinksComponent } from './components/navbar/navbar-links/navbar-links.component';
-import { NavbarFiltersComponent } from './components/navbar/navbar-filters/navbar-filters.component';
 import { RegisterComponent } from './login/register/register.component';
 import { VillaListComponent } from './components/product-list/villa-list/villa-list.component';
 import { SingleVillaComponent } from './components/product-list/single-villa/single-villa.component';
+import { AddVillaComponent } from './components/add-villa/add-villa.component';
+import { AngularToastifyModule, ToastService } from 'angular-toastify';
 
 @NgModule({
   declarations: [
@@ -29,14 +26,10 @@ import { SingleVillaComponent } from './components/product-list/single-villa/sin
     HomeComponent,
     NavbarComponent,
     ProductListComponent,
-    ProductItemComponent,
-    ProductItemLoaderComponent,
-    NavbarLogoComponent,
-    NavbarLinksComponent,
-    NavbarFiltersComponent,
     RegisterComponent,
     VillaListComponent,
-    SingleVillaComponent
+    SingleVillaComponent,
+    AddVillaComponent
   ],
   imports: [
     BrowserModule,
@@ -45,10 +38,12 @@ import { SingleVillaComponent } from './components/product-list/single-villa/sin
     AppRouting,
     FormsModule,
     HttpClientModule,
-    NgxSkeletonLoaderModule
+    NgxSkeletonLoaderModule,
+    AngularToastifyModule
   ],
   providers: [
-    provideClientHydration()
+    provideClientHydration(),
+    ToastService
   ],
   bootstrap: [AppComponent]
 })

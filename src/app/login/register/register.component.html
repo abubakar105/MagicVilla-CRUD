@@ -12,6 +12,39 @@
                 <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">
                   Sign up
                 </p>
+                <div
+                  *ngIf="isError"
+                  class="alert alert-danger alert-dismissible fade show"
+                  role="alert"
+                >
+                  <strong>Try Again !</strong> The username already Exists.
+                  <button
+                    (click)="closeMsg()"
+                    type="button"
+                    class="close"
+                    data-dismiss="alert"
+                    aria-label="Close"
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div
+                  *ngIf="isSuccess"
+                  class="alert alert-success alert-dismissible fade show"
+                  role="alert"
+                >
+                  <strong>Congratulations !</strong> Youser Registered
+                  Successfully
+                  <button
+                    (click)="closeMsg()"
+                    type="button"
+                    class="close"
+                    data-dismiss="alert"
+                    aria-label="Close"
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
                 <form
                   [formGroup]="registerForm"
                   (ngSubmit)="onSubmit()"
@@ -22,64 +55,114 @@
                   >
                     <i class="fas fa-user fa-lg me-3 fa-fw m-2 mb-2"></i>
                     <div class="form-outline flex-fill">
+                      <label class="form-label" for="form3Example1c"
+                        >Your Name</label
+                      >
                       <input
                         formControlName="name"
                         type="text"
                         id="form3Example1c"
                         class="form-control"
+                        name="name"
                       />
-                      <label class="form-label" for="form3Example1c"
-                        >Your Name</label
+                      <p
+                        class="text-danger"
+                        *ngIf="
+                          registerForm.controls.name.touched &&
+                          !registerForm.controls.name.valid
+                        "
                       >
+                        Valid Name is Required
+                      </p>
                     </div>
                   </div>
 
                   <div class="d-flex flex-row align-items-center mb-4">
                     <i class="fas fa-envelope fa-lg me-3 m-2 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
+                      <label class="form-label" for="form3Example3c"
+                        >YouserName</label
+                      >
                       <input
                         type="email"
                         id="form3Example3c"
                         class="form-control"
                         formControlName="email"
                       />
-                      <label class="form-label" for="form3Example3c"
-                        >Your Email</label
+                      <p
+                        class="text-danger"
+                        *ngIf="
+                          registerForm.controls.email.touched &&
+                          !registerForm.controls.email.valid
+                        "
                       >
+                        Valid UserName is Required
+                      </p>
                     </div>
                   </div>
 
                   <div class="d-flex flex-row align-items-center mb-4">
                     <i class="fas fa-lock fa-lg me-3 fa-fw m-2"></i>
                     <div class="form-outline flex-fill mb-0">
+                      <label class="form-label" for="form3Example4c"
+                        >Password</label
+                      >
                       <input
                         type="password"
                         id="form3Example4c"
                         class="form-control"
                         formControlName="password"
                       />
-                      <label class="form-label" for="form3Example4c"
-                        >Password</label
+                      <p
+                        class="text-danger"
+                        *ngIf="
+                          registerForm.controls.password.touched &&
+                          !registerForm.controls.password.valid
+                        "
                       >
+                        Valid Password is Required
+                      </p>
                     </div>
                   </div>
 
                   <div class="d-flex flex-row align-items-center mb-4">
                     <i class="fas fa-key fa-lg me-3 fa-fw m-2"></i>
                     <div class="form-outline flex-fill mb-0">
-                      <input
+                      <label class="form-label" for="form3Example4cd"
+                        >Role</label
+                      >
+                      <br />
+                      <select
+                        formControlName="role"
+                        class="form-select"
+                        aria-label="Default select example"
+                      >
+                        <option disabled [selected]="true">
+                          Select your Role
+                        </option>
+                        <option value="role">User</option>
+                        <option value="user">Admin</option>
+                      </select>
+                      <p
+                        class="text-danger"
+                        *ngIf="
+                          registerForm.controls.role.touched &&
+                          !registerForm.controls.role.valid
+                        "
+                      >
+                        Valid Role is Required
+                      </p>
+
+                      <!-- <input
                         type="text"
                         id="form3Example4cd"
                         class="form-control"
                         formControlName="role"
-                      />
-                      <label class="form-label" for="form3Example4cd"
-                        >Role</label
-                      >
+                      /> -->
                     </div>
                   </div>
 
-                  <div class="form-check m-2">
+                  <!-- <div class="form-check m-2">
                     <input
                       class="form-check-input me-2"
                       type="checkbox"
@@ -92,13 +175,18 @@
                         >Terms of service</a
                       >
                     </label>
-                  </div>
+                  </div> -->
 
-                  <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                  <div class="w-100 text-center m-2">
+                  <a routerLink="/login" class="text-center">Already have an account !</a>
+
+                  </div>
+                  <div class="d-flex flex-row justify-content-center mx-4 mb-3 mb-lg-4">
                     <button
                       type="button"
                       type="submit"
-                      class="btn btn-primary btn-lg"
+                      class="btn btn-primary text-center btn-lg d-block"
+                      [disabled]="!registerForm.valid"
                     >
                       Register
                     </button>

@@ -38,6 +38,10 @@ export class LoginService {
         })
         );
   }
+  createUser(createUser): Observable<any>{
+          
+    return this.http.post<any>('https://localhost:7065/api/UserAuth/register',createUser);
+    }
   // constructor(private http: HttpClient) { }
   // private url='https://dummyjson.com/auth/login'
 

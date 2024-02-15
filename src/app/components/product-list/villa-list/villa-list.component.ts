@@ -9,5 +9,5 @@ export class VillaListComponent implements OnInit {
   @Input() villassss: any; // Ensure the type matches your data type
   ngOnInit(): void {
     console.log("Villas in VillaListComponent:", this.villassss);
-  }m
+  }
 }

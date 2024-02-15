@@ -23,16 +23,11 @@ export class LoginComponent {
 
   onSubmit() {
     this.sendingRequest=true
-    // this.user.email=this.loginForm.value.email
-    this.user.email = 'string';
-
-    // this.user.password = this.loginForm.value.password
-    this.user.password = 'string';
-    console.log(this.user);
+    this.user.email=this.loginForm.value.email;
+    this.user.password=this.loginForm.value.password;
     this.loginForm.reset();
     this.loginService.login(this.user).subscribe({
       next: (token: string) => {
-        console.log(token)
           localStorage.setItem('UserToken', JSON.stringify(token));
           this.sendingRequest=false;
       },

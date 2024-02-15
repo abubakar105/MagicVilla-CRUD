@@ -14,6 +14,18 @@ export class ProductListComponent implements OnInit {
   update(id){
     this.router.navigate(['/home/villas', id]);
   }
+  deleteVilla(id){
+    console.log("Delete")
+    this.productService.deleteVilla(id).subscribe({
+      next: (resData) => {
+        console.log('Products:', resData);
+        this.getProducts()
+      },
+      error: (error) => {
+        console.error('Error fetching products:', error);
+      },
+    })
+  }
   ngOnInit(): void {
     this.getProducts();
     

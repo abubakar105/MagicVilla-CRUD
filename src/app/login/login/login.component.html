@@ -1,4 +1,4 @@
-<section class="" style="background-color: #508bfc">
+<section class="vh-100" style="background-color: #508bfc">
   <div class="container py-5 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col-12 col-md-8 col-lg-6 col-xl-5">
@@ -9,28 +9,19 @@
             <form (ngSubmit)="onSubmit()" #f="ngForm">
               <div class="form-outline mb-4">
                 <input
-                  type="email"
-                  id="typeEmailX-2"
+                  type="text"
                   ngModel
                   name="email"
-                  email
                   required
                   #email="ngModel"
                   class="form-control form-control-lg"
                 />
                 <p *ngIf="!email.valid && email.touched" class="text-danger">
-                  Email is required
+                  Enter a valid username
                 </p>
-                <p
-                  *ngIf="!(email.valid && email.touched) && email.length >= 1"
-                  class="text-danger"
-                >
-                  Enter a valid Email
-                </p>
-                <p *ngIf="email.errors?.['email']">Not a valid Email</p>
+                
 
-
-                <label class="form-label" for="typeEmailX-2">Email</label>
+                <label class="form-label" for="typeEmailX-2">UserName</label>
               </div>
 
               <div class="form-outline mb-4">
@@ -40,7 +31,6 @@
                   ngModel
                   password
                   required
-                  minlength="5"
                   #password="ngModel"
                   name="password"
                   class="form-control form-control-lg"
@@ -49,7 +39,7 @@
                   *ngIf="!password.valid && password.touched"
                   class="text-danger"
                 >
-                  Minimum length is 8 chracter
+                  Valid Password is required
                 </p>
                 <label class="form-label" for="typePasswordX-2">Password</label>
               </div>
@@ -62,7 +52,7 @@
                 <span (click)="dismiss()" class="btn btn-danger">ok</span>
               </div>
               <!-- Checkbox -->
-              <div class="form-check d-flex justify-content-start mb-4">
+              <!-- <div class="form-check d-flex justify-content-start mb-4">
                 <input
                   class="form-check-input"
                   type="checkbox"
@@ -72,7 +62,7 @@
                 <label class="form-check-label" for="form1Example3">
                   Remember password
                 </label>
-              </div>
+              </div> -->
               <div class="">
                   <a routerLink="/register">Dont have account!</a>
                   <p></p>
@@ -96,7 +86,7 @@
             </form>
             <hr class="my-4" />
 
-            <button
+            <!-- <button
               class="btn btn-lg btn-block btn-primary"
               style="background-color: #dd4b39"
               type="submit"
@@ -109,7 +99,7 @@
               type="submit"
             >
               <i class="fab fa-facebook-f me-2"></i>Sign in with facebook
-            </button>
+            </button> -->
           </div>
         </div>
       </div>
