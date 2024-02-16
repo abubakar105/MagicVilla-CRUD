@@ -3,7 +3,14 @@
 
   <div class="content"></div>
 </div>
-<div class="container p-4 border">
+<div  class="container p-4 border">
+  <div *ngIf="isDeleted" class="alert alert-warning alert-dismissible d-flex align-items-center fade show">
+    <i class="bi-exclamation-triangle-fill"></i>
+    <strong class="mx-2">Warning!</strong> The villa has been deleted Successfully
+    <button type="button" class="btn-close close" data-bs-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+</div>
   <div class="row pb-2">
     <div class="col d-flex justify-content-between align-items-center mx-3">
       <h1 class="text-primary">Villa List</h1>
@@ -21,8 +28,17 @@
         <th>Application Type</th>
       </tr>
     </thead>
-    <tbody *ngFor="let villa of Villas">
-      <tr>
+    <tbody >
+      <tr *ngFor="
+      let villa of Villas
+        | paginate
+          : {
+              itemsPerPage: tableSize,
+              currentPage: page,
+              totalItems: count
+            };
+      let i = index
+    ">
         <td>{{ villa.name }}</td>
         <td>{{ villa.rate }}</td>
         <td>{{ villa.details }}</td>
@@ -39,4 +55,12 @@
       </tr>
     </tbody>
   </table>
+  <div class="d-flex justify-content-center">
+    <pagination-controls
+      previousLabel="Prev"
+      nextLabel="Next"
+      (pageChange)="onTableDataChange($event)"
+    >
+    </pagination-controls>
+  </div>
 </div>

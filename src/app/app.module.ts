@@ -19,6 +19,8 @@ import { AddVillaComponent } from './components/add-villa/add-villa.component';
 import { AngularToastifyModule, ToastService } from 'angular-toastify';
 import { AuthInterceptor, AuthInterceptorProvider } from './interceptors/auth.interceptor';
 
+import { NgxPaginationModule } from 'ngx-pagination';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,7 +42,8 @@ import { AuthInterceptor, AuthInterceptorProvider } from './interceptors/auth.in
     FormsModule,
     HttpClientModule,
     NgxSkeletonLoaderModule,
-    AngularToastifyModule
+    AngularToastifyModule,
+    NgxPaginationModule
   ],
   providers: [
     provideClientHydration(),

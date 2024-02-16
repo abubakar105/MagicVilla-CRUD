@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Params, Router } from '@angular/router';
 import { Observable, map } from 'rxjs';
@@ -7,17 +7,25 @@ import { Observable, map } from 'rxjs';
   providedIn: 'root',
 })
 export class ProductService {
-   token:string;
+  token: string;
   constructor(private http: HttpClient, private router: Router) {
-    this.token = localStorage.getItem("UserToken"); 
+    this.token = localStorage.getItem('UserToken');
   }
   productList = [];
+
+  getPaginatedData(pageSize: number, pageNumber: number): Observable<any> {
+    const params = new HttpParams()
+      .set('pageSize', pageSize.toString())
+      .set('pageNumber', pageNumber.toString());
+  
+    return this.http.get<any>('https://localhost:7065/api/VillaApi', { params });
+  }
 
   fetchProducts(): Observable<any> {
     return this.http.get('https://localhost:7065/api/VillaApi');
   }
   createVilla(villa): Observable<any> {
-    return this.http.post('https://localhost:7065/api/VillaApi',villa);
+    return this.http.post('https://localhost:7065/api/VillaApi', villa);
   }
   fetchSingleVilla(id: Params) {
     return this.http.get(`https://localhost:7065/api/VillaApi/${id}`);
@@ -31,7 +39,9 @@ export class ProductService {
 
   updateVilla(id: number, updatedVilla: any) {
     console.log(id, updatedVilla);
-    return this.http
-      .put(`https://localhost:7065/api/VillaApi/${id}`, updatedVilla);
+    return this.http.put(
+      `https://localhost:7065/api/VillaApi/${id}`,
+      updatedVilla
+    );
   }
 }
