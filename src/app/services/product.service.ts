@@ -21,8 +21,15 @@ export class ProductService {
     return this.http.get<any>('https://localhost:7065/api/VillaApi', { params });
   }
 
-  fetchProducts(): Observable<any> {
-    return this.http.get('https://localhost:7065/api/VillaApi');
+  fetchProducts(search?,limit?): Observable<any> {
+    let rate=10000;
+    if(limit>0){
+      rate=limit;
+    }
+  
+    console.log("rate",limit)
+    console.log("limit",rate)
+    return this.http.get(`https://localhost:7065/api/VillaApi?search=${search}&rate=${rate}`);
   }
   createVilla(villa): Observable<any> {
     return this.http.post('https://localhost:7065/api/VillaApi', villa);

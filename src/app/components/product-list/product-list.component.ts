@@ -11,18 +11,34 @@ export class ProductListComponent implements OnInit {
   Villas = [];
   loading = false;
   isDeleted=false;
+  limitRate :number=0;
+  search='';
   POSTS: any;
   page: number = 1;
   count: number = 0;
   tableSize: number = 4;
   tableSizes: any = [3, 6, 9, 12];
   constructor(private productService: ProductService,private router: Router) {}
+  ngOnInit(): void {
+    this.getProducts();
+  }
+  limitPrice(r:number){
+    console.log("VALUEEE",r)
+    // if(r>0){
+      this.limitRate=r;
+    this.getProducts();
+    // }
+  }
   update(id){
     this.router.navigate(['/home/villas', id]);
   }
   onTableDataChange(event: any) {
     this.page = event;
     this.getProducts();
+  }
+  filterByName(search){
+    this.search=search
+    this.getProducts()
   }
   onTableSizeChange(event: any): void {
     this.tableSize = event.target.value;
@@ -44,13 +60,10 @@ export class ProductListComponent implements OnInit {
       },
     })
   }
-  ngOnInit(): void {
-    this.getProducts();
-    
-  }
+
   getProducts() {
     this.loading = true;
-    this.productService.fetchProducts().subscribe({
+    this.productService.fetchProducts(this.search,this.limitRate).subscribe({
       next: (resData) => {
         this.Villas = resData.result;
         this.loading = false;

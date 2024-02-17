@@ -1,45 +1,91 @@
-<div *ngIf="loading">
+<!-- <div *ngIf="loading">
   <div class="loading">Loading&#8230;</div>
 
   <div class="content"></div>
-</div>
-<div  class="container p-4 border">
-  <div *ngIf="isDeleted" class="alert alert-warning alert-dismissible d-flex align-items-center fade show">
+</div> -->
+<div class="container p-4 border">
+  <div
+    *ngIf="isDeleted"
+    class="alert alert-warning alert-dismissible d-flex align-items-center fade show"
+  >
     <i class="bi-exclamation-triangle-fill"></i>
-    <strong class="mx-2">Warning!</strong> The villa has been deleted Successfully
-    <button type="button" class="btn-close close" data-bs-dismiss="alert" aria-label="Close">
+    <strong class="mx-2">Warning!</strong> The villa has been deleted
+    Successfully
+    <button
+      type="button"
+      class="btn-close close"
+      data-bs-dismiss="alert"
+      aria-label="Close"
+    >
       <span aria-hidden="true">&times;</span>
     </button>
-</div>
-  <div class="row pb-2">
-    <div class="col d-flex justify-content-between align-items-center mx-3">
-      <h1 class="text-primary">Villa List</h1>
-       <div class="">
-        <button [routerLink]="['create-villas']" class="btn btn-primary">Create new villa</button>
+  </div>
+  <div class="row pb-2 container">
+    <div class="col d- justify-content-between align-items-center mx-3">
+      <div class="d-flex justify-content-between  align-items-center mx-3">
+        <div class="text-center d-flex flex-column">
+          <label class="text-center font-weight-bold" for=""
+            >Set Price Limit</label
+          >
+          <select (change)="limitPrice($event.target.value)">
+            <option
+              *ngFor="let item of [].constructor(10); let i = index; slice: 1"
+            >
+              {{ i * 100 }}
+            </option>
+          </select>
+        </div>
+        <div class="text-center">
+          <label class="text-center font-weight-bold" for=""
+            >Filter Villas</label
+          >
+          <input
+            name="search"
+            [ngModel]="search"
+            (ngModelChange)="filterByName($event)"
+            class="form-control"
+            type="text"
+          />
+        </div>
+      </div>
+      <div class="d-flex justify-content-between align-items-center mx-3">
+        
+        <div class="">
+          <h1 class="text-primary">Villa List</h1>
+        </div>
+        <div class="">
+          <button [routerLink]="['create-villas']" class="btn btn-primary">
+            Create new villa
+          </button>
+        </div>
       </div>
     </div>
   </div>
   <table class="table table-bordered table-striped" style="width: 100%">
-    <thead>
+    <thead class="bg-primary">
       <tr>
         <th>Product Name</th>
+        <th>Product Description</th>
         <th>Price</th>
         <th>Category</th>
         <th>Application Type</th>
       </tr>
     </thead>
-    <tbody >
-      <tr *ngFor="
-      let villa of Villas
-        | paginate
-          : {
-              itemsPerPage: tableSize,
-              currentPage: page,
-              totalItems: count
-            };
-      let i = index
-    ">
+    <tbody *ngIf="Villas.length > 0">
+      <tr
+        *ngFor="
+          let villa of Villas
+            | paginate
+              : {
+                  itemsPerPage: tableSize,
+                  currentPage: page,
+                  totalItems: count
+                };
+          let i = index
+        "
+      >
         <td>{{ villa.name }}</td>
+        <td>{{ villa.details }}</td>
         <td>{{ villa.rate }}</td>
         <td>{{ villa.details }}</td>
         <td class="text-center">
@@ -48,12 +94,15 @@
               <i class="fa fa-pencil text-white" aria-hidden="true"></i>
             </a>
             <a (click)="deleteVilla(villa.id)" class="btn btn-danger mx-2">
-              <i  class="fa fa-trash text-white" aria-hidden="true"></i>
+              <i class="fa fa-trash text-white" aria-hidden="true"></i>
             </a>
           </div>
         </td>
       </tr>
     </tbody>
+    <div *ngIf="Villas.length == 0" class="m-3 p-3 text-center">
+      <h2 class="text-center text-danger">No Search Found</h2>
+    </div>
   </table>
   <div class="d-flex justify-content-center">
     <pagination-controls
